@@ -1,6 +1,6 @@
 import { ObjectType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { IsDate, IsString, IsOptional } from "class-validator";
+import { IsDate, IsString, IsOptional, IsInt } from "class-validator";
 import { Type } from "class-transformer";
 @ObjectType()
 class City {
@@ -28,6 +28,16 @@ class City {
     nullable: true,
   })
   name!: string | null;
+  @ApiProperty({
+    required: false,
+    type: Number,
+  })
+  @IsInt()
+  @IsOptional()
+  @Field(() => Number, {
+    nullable: true,
+  })
+  population!: number | null;
   @ApiProperty({
     required: true,
   })

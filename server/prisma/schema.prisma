@@ -44,9 +44,10 @@ model Team {
 }
 
 model City {
-  createdAt DateTime @default(now())
-  id        String   @id @default(cuid())
-  name      String?
-  teams     Team[]
-  updatedAt DateTime @updatedAt
+  createdAt  DateTime @default(now())
+  id         String   @id @default(cuid())
+  name       String?
+  population Int?
+  teams      Team[]
+  updatedAt  DateTime @updatedAt
 }
