@@ -176,6 +176,7 @@ export class CityControllerBase {
       );
     }
     try {
+      // @ts-ignore
       return await this.service.update({
         ...query,
         where: params,

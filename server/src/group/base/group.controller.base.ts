@@ -176,6 +176,7 @@ export class GroupControllerBase {
       );
     }
     try {
+      // @ts-ignore
       return await this.service.update({
         ...query,
         where: params,
