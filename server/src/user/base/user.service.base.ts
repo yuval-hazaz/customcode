@@ -15,7 +15,7 @@ import { transformStringFieldUpdateInput } from "../../prisma.util";
 export class UserServiceBase {
   constructor(
     protected readonly prisma: PrismaService,
-    private readonly passwordService: PasswordService
+    protected readonly passwordService: PasswordService
   ) {}
   findMany<T extends FindManyUserArgs>(args: Subset<T, FindManyUserArgs>) {
     return this.prisma.user.findMany(args);
