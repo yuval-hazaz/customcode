@@ -1,0 +1,41 @@
+datasource postgres {
+  provider = "postgresql"
+  url = "***"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Group {
+  createdAt DateTime @default(now())
+  id        String   @id @default(cuid())
+  name      String?
+  updatedAt DateTime @updatedAt
+  users     User[]
+}
+
+model Team {
+  createdAt DateTime @default(now())
+  id        String   @id @default(cuid())
+  updatedAt DateTime @updatedAt
+  users     User?    @relation(fields: [usersId])
+  usersId   String?
+}
+
+model User {
+  createdAt DateTime @default(now())
+  employees User[]   @relation(name: "employees")
+  firstName String?
+  group     Group?   @relation(fields: [groupId])
+  groupId   String?
+  id        String   @id @default(cuid())
+  lastName  String?
+  manager   User?    @relation(name: "employees", fields: [managerId])
+  managerId String?
+  password  String
+  roles     String[]
+  teams     Team[]
+  updatedAt DateTime @updatedAt
+  username  String   @unique
+}
