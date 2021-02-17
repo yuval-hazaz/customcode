@@ -5,10 +5,10 @@ import { Panel, PanelHeader, EnumPanelStyle } from "@amplication/design-system";
 const Navigation = (): React.ReactElement => {
   return (
     <>
-      <NavigationItem name="teams" to="/teams" />
-      <NavigationItem name="cities" to="/cities" />
       <NavigationItem name="groups" to="/groups" />
       <NavigationItem name="Users" to="/users" />
+      <NavigationItem name="cities" to="/cities" />
+      <NavigationItem name="teams" to="/teams" />
     </>
   );
 };
