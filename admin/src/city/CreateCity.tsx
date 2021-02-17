@@ -9,37 +9,36 @@ import {
   Button,
   FormHeader,
   Snackbar,
+  TextField,
 } from "@amplication/design-system";
 import { api } from "../api";
 import useBreadcrumbs from "../components/breadcrumbs/use-breadcrumbs";
-import { CitySelect } from "../city/CitySelect";
-import { UserSelect } from "../user/UserSelect";
-import { Team } from "../api/team/Team";
-import { TeamCreateInput } from "../api/team/TeamCreateInput";
+import { City } from "../api/city/City";
+import { CityCreateInput } from "../api/city/CityCreateInput";
 
-const INITIAL_VALUES = {} as TeamCreateInput;
+const INITIAL_VALUES = {} as CityCreateInput;
 
-export const CreateTeam = (): React.ReactElement => {
-  useBreadcrumbs("/teams/new", "Create team");
+export const CreateCity = (): React.ReactElement => {
+  useBreadcrumbs("/cities/new", "Create city");
   const history = useHistory();
 
   const [create, { error, isError, isLoading }] = useMutation<
-    Team,
+    City,
     AxiosError,
-    TeamCreateInput
+    CityCreateInput
   >(
     async (data) => {
-      const response = await api.post("/api/teams", data);
+      const response = await api.post("/api/cities", data);
       return response.data;
     },
     {
       onSuccess: (data, variables) => {
-        history.push(`${"/teams"}/${data.id}`);
+        history.push(`${"/cities"}/${data.id}`);
       },
     }
   );
   const handleSubmit = React.useCallback(
-    (values: TeamCreateInput) => {
+    (values: CityCreateInput) => {
       void create(values);
     },
     [create]
@@ -50,7 +49,7 @@ export const CreateTeam = (): React.ReactElement => {
         <Form
           formStyle={EnumFormStyle.Horizontal}
           formHeaderContent={
-            <FormHeader title={"Create team"}>
+            <FormHeader title={"Create city"}>
               <Button type="submit" disabled={isLoading}>
                 Save
               </Button>
@@ -58,10 +57,7 @@ export const CreateTeam = (): React.ReactElement => {
           }
         >
           <div>
-            <CitySelect label="city" name="city.id" />
-          </div>
-          <div>
-            <UserSelect label="users" name="users.id" />
+            <TextField label="name" name="name" />
           </div>
         </Form>
       </Formik>

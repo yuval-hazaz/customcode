@@ -58,6 +58,12 @@ export class TeamControllerBase {
       data: {
         ...data,
 
+        city: data.city
+          ? {
+              connect: data.city,
+            }
+          : undefined,
+
         users: data.users
           ? {
               connect: data.users,
@@ -65,6 +71,12 @@ export class TeamControllerBase {
           : undefined,
       },
       select: {
+        city: {
+          select: {
+            id: true,
+          },
+        },
+
         createdAt: true,
         id: true,
         updatedAt: true,
@@ -101,6 +113,12 @@ export class TeamControllerBase {
     const results = await this.service.findMany({
       where: query,
       select: {
+        city: {
+          select: {
+            id: true,
+          },
+        },
+
         createdAt: true,
         id: true,
         updatedAt: true,
@@ -141,6 +159,12 @@ export class TeamControllerBase {
       ...query,
       where: params,
       select: {
+        city: {
+          select: {
+            id: true,
+          },
+        },
+
         createdAt: true,
         id: true,
         updatedAt: true,
@@ -203,6 +227,12 @@ export class TeamControllerBase {
         data: {
           ...data,
 
+          city: data.city
+            ? {
+                connect: data.city,
+              }
+            : undefined,
+
           users: data.users
             ? {
                 connect: data.users,
@@ -210,6 +240,12 @@ export class TeamControllerBase {
             : undefined,
         },
         select: {
+          city: {
+            select: {
+              id: true,
+            },
+          },
+
           createdAt: true,
           id: true,
           updatedAt: true,
@@ -251,6 +287,12 @@ export class TeamControllerBase {
         ...query,
         where: params,
         select: {
+          city: {
+            select: {
+              id: true,
+            },
+          },
+
           createdAt: true,
           id: true,
           updatedAt: true,

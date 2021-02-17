@@ -4,6 +4,7 @@ import { AxiosError } from "axios";
 import { useQuery, useMutation } from "react-query";
 import { Formik } from "formik";
 import pick from "lodash.pick";
+
 import {
   Form,
   EnumFormStyle,
@@ -11,36 +12,36 @@ import {
   FormHeader,
   Snackbar,
   EnumButtonStyle,
+  TextField,
 } from "@amplication/design-system";
+
 import { api } from "../api";
 import useBreadcrumbs from "../components/breadcrumbs/use-breadcrumbs";
-import { CitySelect } from "../city/CitySelect";
-import { UserSelect } from "../user/UserSelect";
-import { Team as TTeam } from "../api/team/Team";
-import { TeamUpdateInput } from "../api/team/TeamUpdateInput";
+import { City as TCity } from "../api/city/City";
+import { CityUpdateInput } from "../api/city/CityUpdateInput";
 
-export const Team = (): React.ReactElement => {
-  const match = useRouteMatch<{ id: string }>("/teams/:id/");
+export const City = (): React.ReactElement => {
+  const match = useRouteMatch<{ id: string }>("/cities/:id/");
   const id = match?.params?.id;
   const history = useHistory();
 
   const { data, isLoading, isError, error } = useQuery<
-    TTeam,
+    TCity,
     AxiosError,
     [string, string]
-  >(["get-/api/teams", id], async (key: string, id: string) => {
-    const response = await api.get(`${"/api/teams"}/${id}`);
+  >(["get-/api/cities", id], async (key: string, id: string) => {
+    const response = await api.get(`${"/api/cities"}/${id}`);
     return response.data;
   });
 
-  const [deleteEntity] = useMutation<TTeam, AxiosError>(
+  const [deleteEntity] = useMutation<TCity, AxiosError>(
     async (data) => {
-      const response = await api.delete(`${"/api/teams"}/${id}`, data);
+      const response = await api.delete(`${"/api/cities"}/${id}`, data);
       return response.data;
     },
     {
       onSuccess: (data, variables) => {
-        history.push("//teams");
+        history.push("//cities");
       },
     }
   );
@@ -48,19 +49,19 @@ export const Team = (): React.ReactElement => {
   const [
     update,
     { error: updateError, isError: updateIsError, isLoading: updateIsLoading },
-  ] = useMutation<TTeam, AxiosError, TeamUpdateInput>(async (data) => {
-    const response = await api.patch(`${"/api/teams"}/${id}`, data);
+  ] = useMutation<TCity, AxiosError, CityUpdateInput>(async (data) => {
+    const response = await api.patch(`${"/api/cities"}/${id}`, data);
     return response.data;
   });
 
   const handleSubmit = React.useCallback(
-    (values: TeamUpdateInput) => {
+    (values: CityUpdateInput) => {
       void update(values);
     },
     [update]
   );
 
-  useBreadcrumbs(match?.url, data?.id);
+  useBreadcrumbs(match?.url, data?.name);
 
   const handleDelete = React.useCallback(() => {
     void deleteEntity();
@@ -69,9 +70,7 @@ export const Team = (): React.ReactElement => {
   const errorMessage =
     updateError?.response?.data?.message || error?.response?.data?.message;
 
-  const initialValues = React.useMemo(() => pick(data, ["city", "users"]), [
-    data,
-  ]);
+  const initialValues = React.useMemo(() => pick(data, ["name"]), [data]);
 
   if (isLoading) {
     return <span>Loading...</span>;
@@ -85,8 +84,8 @@ export const Team = (): React.ReactElement => {
             formStyle={EnumFormStyle.Horizontal}
             formHeaderContent={
               <FormHeader
-                title={`${"team"} ${
-                  data?.id && data?.id.length ? data.id : data?.id
+                title={`${"city"} ${
+                  data?.name && data?.name.length ? data.name : data?.id
                 }`}
               >
                 <Button
@@ -105,10 +104,7 @@ export const Team = (): React.ReactElement => {
             }
           >
             <div>
-              <CitySelect label="city" name="city.id" />
-            </div>
-            <div>
-              <UserSelect label="users" name="users.id" />
+              <TextField label="name" name="name" />
             </div>
           </Form>
         </Formik>

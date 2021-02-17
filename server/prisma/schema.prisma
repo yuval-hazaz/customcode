@@ -8,11 +8,21 @@ generator client {
 }
 
 model Team {
+  city      City?    @relation(fields: [cityId])
+  cityId    String?
   createdAt DateTime @default(now())
   id        String   @id @default(cuid())
   updatedAt DateTime @updatedAt
   users     User?    @relation(fields: [usersId])
   usersId   String?
+}
+
+model City {
+  createdAt DateTime @default(now())
+  id        String   @id @default(cuid())
+  name      String?
+  teams     Team[]
+  updatedAt DateTime @updatedAt
 }
 
 model Group {

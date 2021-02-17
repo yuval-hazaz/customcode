@@ -15,6 +15,7 @@ import BreadcrumbsProvider from "./components/breadcrumbs/BreadcrumbsProvider";
 import useBreadcrumbs from "./components/breadcrumbs/use-breadcrumbs";
 import PrivateRoute from "./components/PrivateRoute";
 import { TeamIndex } from "./team/TeamIndex";
+import { CityIndex } from "./city/CityIndex";
 import { GroupIndex } from "./group/GroupIndex";
 import { UserIndex } from "./user/UserIndex";
 
@@ -86,6 +87,7 @@ const AppLayout = (): React.ReactElement => {
           <Switch>
             <PrivateRoute exact path="/" component={Navigation} />
             <PrivateRoute path="/teams" component={TeamIndex} />
+            <PrivateRoute path="/cities" component={CityIndex} />
             <PrivateRoute path="/groups" component={GroupIndex} />
             <PrivateRoute path="/users" component={UserIndex} />
           </Switch>
