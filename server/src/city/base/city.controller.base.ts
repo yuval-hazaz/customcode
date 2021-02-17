@@ -264,6 +264,7 @@ export class CityControllerBase {
 
         createdAt: true,
         id: true,
+        symbol: true,
         updatedAt: true,
 
         users: {

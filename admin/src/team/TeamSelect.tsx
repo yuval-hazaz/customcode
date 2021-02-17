@@ -19,7 +19,7 @@ export const TeamSelect = (props: Props) => {
     return data
       ? data.map((item) => ({
           value: item.id,
-          label: item.id && item.id.length ? item.id : item.id,
+          label: item.symbol && item.symbol.length ? item.symbol : item.id,
         }))
       : [];
   }, [data]);

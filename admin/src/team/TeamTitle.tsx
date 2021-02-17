@@ -27,7 +27,7 @@ export const TeamTitle = ({ id }: Props) => {
 
   return (
     <Link to={`${"/api/teams"}/${id}`} className="entity-id">
-      {data?.id && data?.id.length ? data.id : data?.id}
+      {data?.symbol && data?.symbol.length ? data.symbol : data?.id}
     </Link>
   );
 };

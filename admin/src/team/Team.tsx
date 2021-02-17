@@ -4,6 +4,7 @@ import { AxiosError } from "axios";
 import { useQuery, useMutation } from "react-query";
 import { Formik } from "formik";
 import pick from "lodash.pick";
+
 import {
   Form,
   EnumFormStyle,
@@ -11,7 +12,9 @@ import {
   FormHeader,
   Snackbar,
   EnumButtonStyle,
+  TextField,
 } from "@amplication/design-system";
+
 import { api } from "../api";
 import useBreadcrumbs from "../components/breadcrumbs/use-breadcrumbs";
 import { CitySelect } from "../city/CitySelect";
@@ -60,7 +63,7 @@ export const Team = (): React.ReactElement => {
     [update]
   );
 
-  useBreadcrumbs(match?.url, data?.id);
+  useBreadcrumbs(match?.url, data?.symbol);
 
   const handleDelete = React.useCallback(() => {
     void deleteEntity();
@@ -69,9 +72,10 @@ export const Team = (): React.ReactElement => {
   const errorMessage =
     updateError?.response?.data?.message || error?.response?.data?.message;
 
-  const initialValues = React.useMemo(() => pick(data, ["city", "users"]), [
-    data,
-  ]);
+  const initialValues = React.useMemo(
+    () => pick(data, ["city", "symbol", "users"]),
+    [data]
+  );
 
   if (isLoading) {
     return <span>Loading...</span>;
@@ -86,7 +90,7 @@ export const Team = (): React.ReactElement => {
             formHeaderContent={
               <FormHeader
                 title={`${"team"} ${
-                  data?.id && data?.id.length ? data.id : data?.id
+                  data?.symbol && data?.symbol.length ? data.symbol : data?.id
                 }`}
               >
                 <Button
@@ -106,6 +110,9 @@ export const Team = (): React.ReactElement => {
           >
             <div>
               <CitySelect label="city" name="city.id" />
+            </div>
+            <div>
+              <TextField label="symbol" name="symbol" />
             </div>
             <div>
               <UserSelect label="users" name="users.id" />

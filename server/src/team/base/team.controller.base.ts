@@ -79,6 +79,7 @@ export class TeamControllerBase {
 
         createdAt: true,
         id: true,
+        symbol: true,
         updatedAt: true,
 
         users: {
@@ -121,6 +122,7 @@ export class TeamControllerBase {
 
         createdAt: true,
         id: true,
+        symbol: true,
         updatedAt: true,
 
         users: {
@@ -167,6 +169,7 @@ export class TeamControllerBase {
 
         createdAt: true,
         id: true,
+        symbol: true,
         updatedAt: true,
 
         users: {
@@ -249,6 +252,7 @@ export class TeamControllerBase {
 
           createdAt: true,
           id: true,
+          symbol: true,
           updatedAt: true,
 
           users: {
@@ -296,6 +300,7 @@ export class TeamControllerBase {
 
           createdAt: true,
           id: true,
+          symbol: true,
           updatedAt: true,
 
           users: {

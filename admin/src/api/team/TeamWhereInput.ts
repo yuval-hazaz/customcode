@@ -5,6 +5,7 @@ export type TeamWhereInput = {
   city?: CityWhereUniqueInput | null;
   createdAt?: Date;
   id?: string;
+  symbol?: string | null;
   updatedAt?: Date;
   users?: UserWhereUniqueInput | null;
 };

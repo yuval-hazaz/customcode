@@ -37,6 +37,7 @@ model Team {
   cityId    String?
   createdAt DateTime @default(now())
   id        String   @id @default(cuid())
+  symbol    String?
   updatedAt DateTime @updatedAt
   users     User?    @relation(fields: [usersId])
   usersId   String?

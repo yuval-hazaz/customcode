@@ -44,6 +44,11 @@ const FIELDS: DataField[] = [
     sortable: false,
   },
   {
+    name: "symbol",
+    title: "symbol",
+    sortable: false,
+  },
+  {
     name: "updatedAt",
     title: "Updated At",
     sortable: false,
@@ -92,6 +97,9 @@ export const TeamList = (): React.ReactElement => {
                 </DataGridCell>
                 <DataGridCell>
                   <TimeSince time={item.createdAt} />
+                </DataGridCell>
+                <DataGridCell>
+                  <>{item.symbol}</>
                 </DataGridCell>
                 <DataGridCell>
                   <TimeSince time={item.updatedAt} />
