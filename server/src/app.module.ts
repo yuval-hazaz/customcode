@@ -1,8 +1,8 @@
 import { Module } from "@nestjs/common";
+import { UserModule } from "./user/user.module";
+import { GroupModule } from "./group/group.module";
 import { TeamModule } from "./team/team.module";
 import { CityModule } from "./city/city.module";
-import { GroupModule } from "./group/group.module";
-import { UserModule } from "./user/user.module";
 import { ACLModule } from "./auth/acl.module";
 import { AuthModule } from "./auth/auth.module";
 import { MorganModule } from "nest-morgan";
@@ -14,10 +14,10 @@ import { GraphQLModule } from "@nestjs/graphql";
 @Module({
   controllers: [],
   imports: [
+    UserModule,
+    GroupModule,
     TeamModule,
     CityModule,
-    GroupModule,
-    UserModule,
     ACLModule,
     AuthModule,
     MorganModule,

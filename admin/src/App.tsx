@@ -14,10 +14,10 @@ import BreadcrumbsContext from "./components/breadcrumbs/BreadcrumbsContext";
 import BreadcrumbsProvider from "./components/breadcrumbs/BreadcrumbsProvider";
 import useBreadcrumbs from "./components/breadcrumbs/use-breadcrumbs";
 import PrivateRoute from "./components/PrivateRoute";
+import { UserIndex } from "./user/UserIndex";
+import { GroupIndex } from "./group/GroupIndex";
 import { TeamIndex } from "./team/TeamIndex";
 import { CityIndex } from "./city/CityIndex";
-import { GroupIndex } from "./group/GroupIndex";
-import { UserIndex } from "./user/UserIndex";
 
 const App = (): React.ReactElement => {
   const history = useHistory();
@@ -86,10 +86,10 @@ const AppLayout = (): React.ReactElement => {
         <Page>
           <Switch>
             <PrivateRoute exact path="/" component={Navigation} />
+            <PrivateRoute path="/users" component={UserIndex} />
+            <PrivateRoute path="/groups" component={GroupIndex} />
             <PrivateRoute path="/teams" component={TeamIndex} />
             <PrivateRoute path="/cities" component={CityIndex} />
-            <PrivateRoute path="/groups" component={GroupIndex} />
-            <PrivateRoute path="/users" component={UserIndex} />
           </Switch>
         </Page>
       </MainLayout.Content>
