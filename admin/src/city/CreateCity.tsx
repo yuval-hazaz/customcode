@@ -59,6 +59,14 @@ export const CreateCity = (): React.ReactElement => {
           <div>
             <TextField label="name" name="name" />
           </div>
+          <div>
+            <TextField
+              type="number"
+              step={1}
+              label="population"
+              name="population"
+            />
+          </div>
         </Form>
       </Formik>
       <Snackbar open={isError} message={error?.response?.data?.message} />
