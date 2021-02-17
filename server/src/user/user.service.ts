@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { PrismaService } from "nestjs-prisma";
 import { UserServiceBase } from "./base/user.service.base";
-import { PasswordService } from "../../auth/password.service";
+import { PasswordService } from "../auth/password.service";
 
 @Injectable()
 export class UserService extends UserServiceBase {
@@ -9,6 +9,6 @@ export class UserService extends UserServiceBase {
     protected readonly prisma: PrismaService,
     protected readonly passwordService: PasswordService
   ) {
-    super(prisma);
+    super(prisma, passwordService);
   }
 }
