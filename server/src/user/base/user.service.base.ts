@@ -9,8 +9,8 @@ import {
   Subset,
 } from "@prisma/client";
 
-import { PasswordService } from "../auth/password.service";
-import { transformStringFieldUpdateInput } from "../prisma.util";
+import { PasswordService } from "../../auth/password.service";
+import { transformStringFieldUpdateInput } from "../../prisma.util";
 
 export class UserServiceBase {
   constructor(
