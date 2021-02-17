@@ -42,6 +42,11 @@ const FIELDS: DataField[] = [
     sortable: false,
   },
   {
+    name: "population",
+    title: "population",
+    sortable: false,
+  },
+  {
     name: "updatedAt",
     title: "Updated At",
     sortable: false,
@@ -85,6 +90,9 @@ export const CityList = (): React.ReactElement => {
                 </DataGridCell>
                 <DataGridCell>
                   <>{item.name}</>
+                </DataGridCell>
+                <DataGridCell>
+                  <>{item.population}</>
                 </DataGridCell>
                 <DataGridCell>
                   <TimeSince time={item.updatedAt} />

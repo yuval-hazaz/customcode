@@ -70,7 +70,10 @@ export const City = (): React.ReactElement => {
   const errorMessage =
     updateError?.response?.data?.message || error?.response?.data?.message;
 
-  const initialValues = React.useMemo(() => pick(data, ["name"]), [data]);
+  const initialValues = React.useMemo(
+    () => pick(data, ["name", "population"]),
+    [data]
+  );
 
   if (isLoading) {
     return <span>Loading...</span>;
@@ -105,6 +108,14 @@ export const City = (): React.ReactElement => {
           >
             <div>
               <TextField label="name" name="name" />
+            </div>
+            <div>
+              <TextField
+                type="number"
+                step={1}
+                label="population"
+                name="population"
+              />
             </div>
           </Form>
         </Formik>

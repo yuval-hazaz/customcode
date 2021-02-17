@@ -62,6 +62,7 @@ export class CityControllerBase {
         createdAt: true,
         id: true,
         name: true,
+        population: true,
         updatedAt: true,
       },
     });
@@ -93,6 +94,7 @@ export class CityControllerBase {
         createdAt: true,
         id: true,
         name: true,
+        population: true,
         updatedAt: true,
       },
     });
@@ -128,6 +130,7 @@ export class CityControllerBase {
         createdAt: true,
         id: true,
         name: true,
+        population: true,
         updatedAt: true,
       },
     });
@@ -185,6 +188,7 @@ export class CityControllerBase {
           createdAt: true,
           id: true,
           name: true,
+          population: true,
           updatedAt: true,
         },
       });
@@ -221,6 +225,7 @@ export class CityControllerBase {
           createdAt: true,
           id: true,
           name: true,
+          population: true,
           updatedAt: true,
         },
       });

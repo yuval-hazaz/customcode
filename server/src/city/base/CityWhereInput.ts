@@ -1,6 +1,6 @@
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { IsDate, IsOptional, IsString } from "class-validator";
+import { IsDate, IsOptional, IsString, IsInt } from "class-validator";
 import { Type } from "class-transformer";
 @InputType()
 class CityWhereInput {
@@ -34,6 +34,16 @@ class CityWhereInput {
     nullable: true,
   })
   name?: string | null;
+  @ApiProperty({
+    required: false,
+    type: Number,
+  })
+  @IsInt()
+  @IsOptional()
+  @Field(() => Number, {
+    nullable: true,
+  })
+  population?: number | null;
   @ApiProperty({
     required: false,
   })
