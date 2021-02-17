@@ -9,6 +9,7 @@ import {
   Button,
   FormHeader,
   Snackbar,
+  TextField,
 } from "@amplication/design-system";
 import { api } from "../api";
 import useBreadcrumbs from "../components/breadcrumbs/use-breadcrumbs";
@@ -59,6 +60,9 @@ export const CreateTeam = (): React.ReactElement => {
         >
           <div>
             <CitySelect label="city" name="city.id" />
+          </div>
+          <div>
+            <TextField label="symbol" name="symbol" />
           </div>
           <div>
             <UserSelect label="users" name="users.id" />

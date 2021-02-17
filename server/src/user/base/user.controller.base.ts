@@ -551,6 +551,7 @@ export class UserControllerBase {
 
         createdAt: true,
         id: true,
+        symbol: true,
         updatedAt: true,
 
         users: {

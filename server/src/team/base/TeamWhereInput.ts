@@ -37,6 +37,16 @@ class TeamWhereInput {
   id?: string;
   @ApiProperty({
     required: false,
+    type: String,
+  })
+  @IsString()
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  symbol?: string | null;
+  @ApiProperty({
+    required: false,
   })
   @IsDate()
   @Type(() => Date)
