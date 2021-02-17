@@ -7,20 +7,20 @@ generator client {
   provider = "prisma-client-js"
 }
 
-model Group {
-  createdAt DateTime @default(now())
-  id        String   @id @default(cuid())
-  name      String?
-  updatedAt DateTime @updatedAt
-  users     User[]
-}
-
 model Team {
   createdAt DateTime @default(now())
   id        String   @id @default(cuid())
   updatedAt DateTime @updatedAt
   users     User?    @relation(fields: [usersId])
   usersId   String?
+}
+
+model Group {
+  createdAt DateTime @default(now())
+  id        String   @id @default(cuid())
+  name      String?
+  updatedAt DateTime @updatedAt
+  users     User[]
 }
 
 model User {
