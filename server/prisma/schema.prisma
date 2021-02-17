@@ -7,6 +7,31 @@ generator client {
   provider = "prisma-client-js"
 }
 
+model User {
+  createdAt DateTime @default(now())
+  employees User[]   @relation(name: "employees")
+  firstName String?
+  group     Group?   @relation(fields: [groupId])
+  groupId   String?
+  id        String   @id @default(cuid())
+  lastName  String?
+  manager   User?    @relation(name: "employees", fields: [managerId])
+  managerId String?
+  password  String
+  roles     String[]
+  teams     Team[]
+  updatedAt DateTime @updatedAt
+  username  String   @unique
+}
+
+model Group {
+  createdAt DateTime @default(now())
+  id        String   @id @default(cuid())
+  name      String?
+  updatedAt DateTime @updatedAt
+  users     User[]
+}
+
 model Team {
   city      City?    @relation(fields: [cityId])
   cityId    String?
@@ -23,29 +48,4 @@ model City {
   name      String?
   teams     Team[]
   updatedAt DateTime @updatedAt
-}
-
-model Group {
-  createdAt DateTime @default(now())
-  id        String   @id @default(cuid())
-  name      String?
-  updatedAt DateTime @updatedAt
-  users     User[]
-}
-
-model User {
-  createdAt DateTime @default(now())
-  employees User[]   @relation(name: "employees")
-  firstName String?
-  group     Group?   @relation(fields: [groupId])
-  groupId   String?
-  id        String   @id @default(cuid())
-  lastName  String?
-  manager   User?    @relation(name: "employees", fields: [managerId])
-  managerId String?
-  password  String
-  roles     String[]
-  teams     Team[]
-  updatedAt DateTime @updatedAt
-  username  String   @unique
 }
