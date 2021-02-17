@@ -241,6 +241,7 @@ export class UserControllerBase {
       );
     }
     try {
+      // @ts-ignore
       return await this.service.update({
         ...query,
         where: params,
