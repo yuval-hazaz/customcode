@@ -39,6 +39,16 @@ class City {
   })
   population!: number | null;
   @ApiProperty({
+    required: false,
+    type: String,
+  })
+  @IsString()
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  state!: string | null;
+  @ApiProperty({
     required: true,
   })
   @IsDate()

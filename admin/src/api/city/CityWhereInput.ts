@@ -3,5 +3,6 @@ export type CityWhereInput = {
   id?: string;
   name?: string | null;
   population?: number | null;
+  state?: string | null;
   updatedAt?: Date;
 };

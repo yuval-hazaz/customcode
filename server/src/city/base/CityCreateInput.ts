@@ -23,5 +23,15 @@ class CityCreateInput {
     nullable: true,
   })
   population?: number | null;
+  @ApiProperty({
+    required: false,
+    type: String,
+  })
+  @IsString()
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  state?: string | null;
 }
 export { CityCreateInput };
