@@ -1,61 +1,61 @@
 [
   {
     "role": "user",
-    "resource": "Group",
+    "resource": "Team",
     "action": "read:own",
     "attributes": "*"
   },
   {
     "role": "user",
-    "resource": "Group",
+    "resource": "Team",
     "action": "create:any",
     "attributes": "*"
   },
   {
     "role": "user",
-    "resource": "Group",
+    "resource": "Team",
     "action": "update:any",
     "attributes": "*"
   },
   {
     "role": "user",
-    "resource": "Group",
+    "resource": "Team",
     "action": "delete:any",
     "attributes": "*"
   },
   {
     "role": "user",
-    "resource": "Group",
+    "resource": "Team",
     "action": "read:any",
     "attributes": "*"
   },
   {
     "role": "user",
-    "resource": "Team",
+    "resource": "Group",
     "action": "read:own",
     "attributes": "*"
   },
   {
     "role": "user",
-    "resource": "Team",
+    "resource": "Group",
     "action": "create:any",
     "attributes": "*"
   },
   {
     "role": "user",
-    "resource": "Team",
+    "resource": "Group",
     "action": "update:any",
     "attributes": "*"
   },
   {
     "role": "user",
-    "resource": "Team",
+    "resource": "Group",
     "action": "delete:any",
     "attributes": "*"
   },
   {
     "role": "user",
-    "resource": "Team",
+    "resource": "Group",
     "action": "read:any",
     "attributes": "*"
   },

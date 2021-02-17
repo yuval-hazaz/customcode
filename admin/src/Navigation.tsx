@@ -5,8 +5,8 @@ import { Panel, PanelHeader, EnumPanelStyle } from "@amplication/design-system";
 const Navigation = (): React.ReactElement => {
   return (
     <>
-      <NavigationItem name="groups" to="/groups" />
       <NavigationItem name="teams" to="/teams" />
+      <NavigationItem name="groups" to="/groups" />
       <NavigationItem name="Users" to="/users" />
     </>
   );
