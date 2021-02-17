@@ -16,5 +16,6 @@ export class CityResolver extends CityResolverBase {
     protected readonly rolesBuilder: nestAccessControl.RolesBuilder
   ) {
     super(service, rolesBuilder);
+    //alon comment
   }
 }

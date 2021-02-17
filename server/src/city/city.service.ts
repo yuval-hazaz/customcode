@@ -6,5 +6,7 @@ import { CityServiceBase } from "./base/city.service.base";
 export class CityService extends CityServiceBase {
   constructor(protected readonly prisma: PrismaService) {
     super(prisma);
+
+    //alon comment
   }
 }
