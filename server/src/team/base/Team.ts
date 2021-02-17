@@ -1,10 +1,19 @@
 import { ObjectType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { IsDate, IsString, ValidateNested, IsOptional } from "class-validator";
+import { CityWhereUniqueInput } from "../../city/base/CityWhereUniqueInput";
+import { ValidateNested, IsOptional, IsDate, IsString } from "class-validator";
 import { Type } from "class-transformer";
 import { UserWhereUniqueInput } from "../../user/base/UserWhereUniqueInput";
 @ObjectType()
 class Team {
+  @ApiProperty({
+    required: false,
+    type: CityWhereUniqueInput,
+  })
+  @ValidateNested()
+  @Type(() => CityWhereUniqueInput)
+  @IsOptional()
+  city!: CityWhereUniqueInput | null;
   @ApiProperty({
     required: true,
   })

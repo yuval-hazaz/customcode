@@ -16,11 +16,9 @@ import {
   TimeSince,
 } from "@amplication/design-system";
 
-import { CityTitle } from "../city/CityTitle";
-import { UserTitle } from "../user/UserTitle";
-import { Team } from "../api/team/Team";
+import { City } from "../api/city/City";
 
-type Data = Team[];
+type Data = City[];
 
 const SORT_DATA: SortData = {
   field: null,
@@ -34,13 +32,13 @@ const FIELDS: DataField[] = [
     sortable: false,
   },
   {
-    name: "city",
-    title: "city",
+    name: "createdAt",
+    title: "Created At",
     sortable: false,
   },
   {
-    name: "createdAt",
-    title: "Created At",
+    name: "name",
+    title: "name",
     sortable: false,
   },
   {
@@ -48,18 +46,13 @@ const FIELDS: DataField[] = [
     title: "Updated At",
     sortable: false,
   },
-  {
-    name: "users",
-    title: "users",
-    sortable: false,
-  },
 ];
 
-export const TeamList = (): React.ReactElement => {
+export const CityList = (): React.ReactElement => {
   const { data, error, isError } = useQuery<Data, AxiosError>(
-    "list-/api/teams",
+    "list-/api/cities",
     async () => {
-      const response = await api.get("/api/teams");
+      const response = await api.get("/api/cities");
       return response.data;
     }
   );
@@ -69,35 +62,32 @@ export const TeamList = (): React.ReactElement => {
       <DataGrid
         fields={FIELDS}
         titleType={EnumTitleType.PageTitle}
-        title={"teams"}
+        title={"cities"}
         loading={false}
         sortDir={SORT_DATA}
         toolbarContentEnd={
-          <Link to={"/teams/new"}>
-            <Button>Create team </Button>
+          <Link to={"/cities/new"}>
+            <Button>Create city </Button>
           </Link>
         }
       >
         {data &&
-          data.map((item: Team) => {
+          data.map((item: City) => {
             return (
               <DataGridRow key={item.id} clickData={item}>
                 <DataGridCell>
-                  <Link className="entity-id" to={`${"/teams"}/${item.id}`}>
+                  <Link className="entity-id" to={`${"/cities"}/${item.id}`}>
                     {item.id}
                   </Link>
-                </DataGridCell>
-                <DataGridCell>
-                  <CityTitle id={item.city?.id} />
                 </DataGridCell>
                 <DataGridCell>
                   <TimeSince time={item.createdAt} />
                 </DataGridCell>
                 <DataGridCell>
-                  <TimeSince time={item.updatedAt} />
+                  <>{item.name}</>
                 </DataGridCell>
                 <DataGridCell>
-                  <UserTitle id={item.users?.id} />
+                  <TimeSince time={item.updatedAt} />
                 </DataGridCell>
               </DataGridRow>
             );

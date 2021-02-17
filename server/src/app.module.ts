@@ -1,5 +1,6 @@
 import { Module } from "@nestjs/common";
 import { TeamModule } from "./team/team.module";
+import { CityModule } from "./city/city.module";
 import { GroupModule } from "./group/group.module";
 import { UserModule } from "./user/user.module";
 import { ACLModule } from "./auth/acl.module";
@@ -14,6 +15,7 @@ import { GraphQLModule } from "@nestjs/graphql";
   controllers: [],
   imports: [
     TeamModule,
+    CityModule,
     GroupModule,
     UserModule,
     ACLModule,

@@ -7,59 +7,59 @@ import * as gqlACGuard from "../../auth/gqlAC.guard";
 import * as gqlUserRoles from "../../auth/gqlUserRoles.decorator";
 import * as abacUtil from "../../auth/abac.util";
 import { isRecordNotFoundError } from "../../prisma.util";
-import { CreateTeamArgs } from "./CreateTeamArgs";
-import { UpdateTeamArgs } from "./UpdateTeamArgs";
-import { DeleteTeamArgs } from "./DeleteTeamArgs";
-import { FindManyTeamArgs } from "./FindManyTeamArgs";
-import { FindOneTeamArgs } from "./FindOneTeamArgs";
-import { Team } from "./Team";
-import { City } from "../../city/base/City";
-import { User } from "../../user/base/User";
-import { TeamService } from "../team.service";
+import { CreateCityArgs } from "./CreateCityArgs";
+import { UpdateCityArgs } from "./UpdateCityArgs";
+import { DeleteCityArgs } from "./DeleteCityArgs";
+import { FindManyCityArgs } from "./FindManyCityArgs";
+import { FindOneCityArgs } from "./FindOneCityArgs";
+import { City } from "./City";
+import { FindManyTeamArgs } from "../../team/base/FindManyTeamArgs";
+import { Team } from "../../team/base/Team";
+import { CityService } from "../city.service";
 
-@graphql.Resolver(() => Team)
+@graphql.Resolver(() => City)
 @common.UseGuards(gqlBasicAuthGuard.GqlBasicAuthGuard, gqlACGuard.GqlACGuard)
-export class TeamResolverBase {
+export class CityResolverBase {
   constructor(
-    protected readonly service: TeamService,
+    protected readonly service: CityService,
     protected readonly rolesBuilder: nestAccessControl.RolesBuilder
   ) {}
 
-  @graphql.Query(() => [Team])
+  @graphql.Query(() => [City])
   @nestAccessControl.UseRoles({
-    resource: "Team",
+    resource: "City",
     action: "read",
     possession: "any",
   })
-  async teams(
-    @graphql.Args() args: FindManyTeamArgs,
+  async cities(
+    @graphql.Args() args: FindManyCityArgs,
     @gqlUserRoles.UserRoles() userRoles: string[]
-  ): Promise<Team[]> {
+  ): Promise<City[]> {
     const permission = this.rolesBuilder.permission({
       role: userRoles,
       action: "read",
       possession: "any",
-      resource: "Team",
+      resource: "City",
     });
     const results = await this.service.findMany(args);
     return results.map((result) => permission.filter(result));
   }
 
-  @graphql.Query(() => Team, { nullable: true })
+  @graphql.Query(() => City, { nullable: true })
   @nestAccessControl.UseRoles({
-    resource: "Team",
+    resource: "City",
     action: "read",
     possession: "own",
   })
-  async team(
-    @graphql.Args() args: FindOneTeamArgs,
+  async city(
+    @graphql.Args() args: FindOneCityArgs,
     @gqlUserRoles.UserRoles() userRoles: string[]
-  ): Promise<Team | null> {
+  ): Promise<City | null> {
     const permission = this.rolesBuilder.permission({
       role: userRoles,
       action: "read",
       possession: "own",
-      resource: "Team",
+      resource: "City",
     });
     const result = await this.service.findOne(args);
     if (result === null) {
@@ -68,21 +68,21 @@ export class TeamResolverBase {
     return permission.filter(result);
   }
 
-  @graphql.Mutation(() => Team)
+  @graphql.Mutation(() => City)
   @nestAccessControl.UseRoles({
-    resource: "Team",
+    resource: "City",
     action: "create",
     possession: "any",
   })
-  async createTeam(
-    @graphql.Args() args: CreateTeamArgs,
+  async createCity(
+    @graphql.Args() args: CreateCityArgs,
     @gqlUserRoles.UserRoles() userRoles: string[]
-  ): Promise<Team> {
+  ): Promise<City> {
     const permission = this.rolesBuilder.permission({
       role: userRoles,
       action: "create",
       possession: "any",
-      resource: "Team",
+      resource: "City",
     });
     const invalidAttributes = abacUtil.getInvalidAttributes(
       permission,
@@ -96,45 +96,31 @@ export class TeamResolverBase {
         .map((role: string) => JSON.stringify(role))
         .join(",");
       throw new apollo.ApolloError(
-        `providing the properties: ${properties} on ${"Team"} creation is forbidden for roles: ${roles}`
+        `providing the properties: ${properties} on ${"City"} creation is forbidden for roles: ${roles}`
       );
     }
     // @ts-ignore
     return await this.service.create({
       ...args,
-      data: {
-        ...args.data,
-
-        city: args.data.city
-          ? {
-              connect: args.data.city,
-            }
-          : undefined,
-
-        users: args.data.users
-          ? {
-              connect: args.data.users,
-            }
-          : undefined,
-      },
+      data: args.data,
     });
   }
 
-  @graphql.Mutation(() => Team)
+  @graphql.Mutation(() => City)
   @nestAccessControl.UseRoles({
-    resource: "Team",
+    resource: "City",
     action: "update",
     possession: "any",
   })
-  async updateTeam(
-    @graphql.Args() args: UpdateTeamArgs,
+  async updateCity(
+    @graphql.Args() args: UpdateCityArgs,
     @gqlUserRoles.UserRoles() userRoles: string[]
-  ): Promise<Team | null> {
+  ): Promise<City | null> {
     const permission = this.rolesBuilder.permission({
       role: userRoles,
       action: "update",
       possession: "any",
-      resource: "Team",
+      resource: "City",
     });
     const invalidAttributes = abacUtil.getInvalidAttributes(
       permission,
@@ -148,28 +134,14 @@ export class TeamResolverBase {
         .map((role: string) => JSON.stringify(role))
         .join(",");
       throw new apollo.ApolloError(
-        `providing the properties: ${properties} on ${"Team"} update is forbidden for roles: ${roles}`
+        `providing the properties: ${properties} on ${"City"} update is forbidden for roles: ${roles}`
       );
     }
     try {
       // @ts-ignore
       return await this.service.update({
         ...args,
-        data: {
-          ...args.data,
-
-          city: args.data.city
-            ? {
-                connect: args.data.city,
-              }
-            : undefined,
-
-          users: args.data.users
-            ? {
-                connect: args.data.users,
-              }
-            : undefined,
-        },
+        data: args.data,
       });
     } catch (error) {
       if (isRecordNotFoundError(error)) {
@@ -181,13 +153,13 @@ export class TeamResolverBase {
     }
   }
 
-  @graphql.Mutation(() => Team)
+  @graphql.Mutation(() => City)
   @nestAccessControl.UseRoles({
-    resource: "Team",
+    resource: "City",
     action: "delete",
     possession: "any",
   })
-  async deleteTeam(@graphql.Args() args: DeleteTeamArgs): Promise<Team | null> {
+  async deleteCity(@graphql.Args() args: DeleteCityArgs): Promise<City | null> {
     try {
       // @ts-ignore
       return await this.service.delete(args);
@@ -201,55 +173,27 @@ export class TeamResolverBase {
     }
   }
 
-  @graphql.ResolveField(() => City, { nullable: true })
+  @graphql.ResolveField(() => [Team])
   @nestAccessControl.UseRoles({
-    resource: "Team",
+    resource: "City",
     action: "read",
     possession: "any",
   })
-  async city(
-    @graphql.Parent() parent: Team,
+  async teams(
+    @graphql.Parent() parent: City,
+    @graphql.Args() args: FindManyTeamArgs,
     @gqlUserRoles.UserRoles() userRoles: string[]
-  ): Promise<City | null> {
+  ): Promise<Team[]> {
     const permission = this.rolesBuilder.permission({
       role: userRoles,
       action: "read",
       possession: "any",
-      resource: "City",
+      resource: "Team",
     });
-    const result = await this.service
+    const results = await this.service
       .findOne({ where: { id: parent.id } })
-      .city();
-
-    if (!result) {
-      return null;
-    }
-    return permission.filter(result);
-  }
-
-  @graphql.ResolveField(() => User, { nullable: true })
-  @nestAccessControl.UseRoles({
-    resource: "Team",
-    action: "read",
-    possession: "any",
-  })
-  async users(
-    @graphql.Parent() parent: Team,
-    @gqlUserRoles.UserRoles() userRoles: string[]
-  ): Promise<User | null> {
-    const permission = this.rolesBuilder.permission({
-      role: userRoles,
-      action: "read",
-      possession: "any",
-      resource: "User",
-    });
-    const result = await this.service
-      .findOne({ where: { id: parent.id } })
-      .users();
-
-    if (!result) {
-      return null;
-    }
-    return permission.filter(result);
+      // @ts-ignore
+      .teams(args);
+    return results.map((result) => permission.filter(result));
   }
 }
