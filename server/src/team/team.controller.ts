@@ -14,8 +14,5 @@ export class TeamController extends TeamControllerBase {
     protected readonly rolesBuilder: nestAccessControl.RolesBuilder
   ) {
     super(service, rolesBuilder);
-
-
-    //custom comment in team controller
   }
 }
