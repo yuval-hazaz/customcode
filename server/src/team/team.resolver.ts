@@ -16,5 +16,7 @@ export class TeamResolver extends TeamResolverBase {
     protected readonly rolesBuilder: nestAccessControl.RolesBuilder
   ) {
     super(service, rolesBuilder);
+
+    //custom comment in team resolver
   }
 }
