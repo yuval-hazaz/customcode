@@ -1,1 +1,10 @@
-{ "dataServiceGeneratorVersion": "0.3.0" }
+{
+  "dataServiceGeneratorVersion": "0.4.0",
+  "appInfo": {
+    "name": "new relations",
+    "description": "",
+    "version": "if49k8cd",
+    "id": "ckl0nif3y06453wjnmnylqx70",
+    "url": "http://localhost:3000/ckl0nif3y06453wjnmnylqx70"
+  }
+}
